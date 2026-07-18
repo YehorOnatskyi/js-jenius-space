@@ -42,21 +42,27 @@
 // let g = 1;
 // if (g > 10) {
 //     console.log(g - 5);
-// } else {
+// } else if (g < 10) {
 //     console.log(g + 5);
+// } else {
+//     console.log(g);
 // }
 // //менше - додайте 5, результат виведіть в консоль
 // let h = 13;
 // if (h > 10) {
 //     console.log(h - 5);
-// } else {
+// } else if (h < 10) {
 //     console.log(h + 5);
+// } else {
+//     console.log(h);
 // }
 // let i = 10;
 // if (i > 10) {
 //     console.log(i - 5);
-// } else {
+// } else if (i < 10) {
 //     console.log(i + 5);
+// } else {
+//     console.log(i);
 // }
 
 //Перевірте це на варіантах 1, 10, 13.
@@ -105,7 +111,6 @@
 //         break;
 // }
 // // виведіть місяць який дорівнює числу
-// console.log(month);
 //Зробіть сервіс який отримує тризначне число
 // let number = 123;
 // let firstDigit = Math.floor(number / 100);
