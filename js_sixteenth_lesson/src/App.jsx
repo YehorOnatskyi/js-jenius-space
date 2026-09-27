@@ -16,7 +16,8 @@ function App() {
     if (text.trim() === "") {
       return;
     }
-    setTodos([...todos, { id: Date.now(), name: text }]);         setText(""); 
+    setTodos([...todos, { id: Date.now(), name: text }]);
+    setText(""); 
   }
 
   function handleDelete(id) {
