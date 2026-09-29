@@ -1,0 +1,35 @@
+.list {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+.del {
+    border: 0;
+    background: transparent;
+    color: #dc2626;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.empty {
+    color: #a1a1aa;
+    font-style: italic;
+}
+.name {
+    flex: 1;
+}
+
+.done {
+    text-decoration: line-through;
+    color: #a1a1aa;
+}
