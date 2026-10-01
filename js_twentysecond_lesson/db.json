@@ -1,0 +1,6 @@
+{
+  "todos": [
+    { "id": 1, "title": "Купити хліб", "description": "У пекарні на розі", "completed": false },
+    { "id": 2, "title": "Помити посуд", "description": "Після вечері", "completed": true }
+  ]
+}

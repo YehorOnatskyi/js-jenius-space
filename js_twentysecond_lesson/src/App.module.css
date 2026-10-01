@@ -1,0 +1,70 @@
+.page {
+  max-width: 560px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.title {
+  margin: 0 0 20px;
+  font-size: 24px;
+}
+
+.empty {
+  padding: 24px 0;
+  text-align: center;
+}
+
+.emptyText {
+  margin: 0 0 16px;
+  color: #71717a;
+}
+
+.addButton {
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.addButton:disabled {
+  background: #a1a1aa;
+  cursor: not-allowed;
+}
+
+.state {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  background: #fff;
+  border-radius: 12px;
+  text-align: center;
+  color: #71717a;
+}
+
+.stateError {
+  color: #dc2626;
+}
+
+.retry {
+  display: block;
+  margin: 16px auto 0;
+  padding: 8px 16px;
+  border: 1px solid #d4d4d8;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.banner {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 14px;
+}
