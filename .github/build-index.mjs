@@ -71,3 +71,37 @@ ${items}
 
 writeFileSync(join("site", "index.html"), html);
 console.log(`Сторінку зі списком зібрано: ${folders.length} робіт`);
+
+// GitHub Pages поважає лише ОДИН 404.html — у корені сайту; підпапкові ігнорує.
+// Для SPA це означає, що пряме посилання на внутрішній маршрут прилітає сюди.
+// Запам'ятовуємо маршрут у ?p=, віддаємо керування index.html потрібної роботи,
+// а вона поверне адресу на місце (див. main.jsx 23-ї роботи).
+const repo = `/${(process.env.GITHUB_REPOSITORY ?? "x/js-jenius-space").split("/").pop()}/`;
+
+const notFound = [
+  "<!doctype html>",
+  '<html lang="uk">',
+  "  <head>",
+  '    <meta charset="UTF-8" />',
+  "    <title>Переадресація…</title>",
+  "    <script>",
+  "      (function () {",
+  `        var repo = ${JSON.stringify(repo)};`,
+  "        var path = location.pathname;",
+  "        if (path.indexOf(repo) !== 0) return;",
+  "        var rest = path.slice(repo.length);",
+  '        var slash = rest.indexOf("/");',
+  "        if (slash <= 0) return;",
+  "        var project = rest.slice(0, slash);",
+  "        var route = rest.slice(slash);",
+  '        location.replace(repo + project + "/?p=" + encodeURIComponent(route) + location.hash);',
+  "      })();",
+  "    <\/script>",
+  "  </head>",
+  "  <body></body>",
+  "</html>",
+  "",
+].join("\n");
+
+writeFileSync(join("site", "404.html"), notFound);
+console.log(`Кореневий 404.html зібрано для ${repo}`);
