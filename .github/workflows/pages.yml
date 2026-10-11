@@ -1,0 +1,70 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Зібрати всі React-роботи
+        run: |
+          set -e
+          mkdir -p site
+          for dir in js_*/; do
+            dir=${dir%/}
+            # Беремо лише проєкти на React: решта уроків — статика без збірки.
+            [ -f "$dir/package.json" ] || continue
+            grep -q '"react"' "$dir/package.json" || continue
+
+            echo "::group::$dir"
+            (
+              cd "$dir"
+              npm install --no-audit --no-fund
+              # base треба саме такий: на Pages проєкт лежить у підпапці репозиторію,
+              # інакше всі посилання на css і js підуть у корінь домену і дадуть 404.
+              npx vite build --base="/${GITHUB_REPOSITORY#*/}/$dir/"
+            )
+
+            mkdir -p "site/$dir"
+            cp -r "$dir/dist/." "site/$dir/"
+            # GitHub Pages не вміє rewrite, тому для SPA кладемо копію index.html
+            # під іменем 404.html: при прямому заході на /todo-list Pages віддасть її,
+            # а далі маршрут розбере вже React Router.
+            cp "site/$dir/index.html" "site/$dir/404.html"
+            echo "::endgroup::"
+          done
+
+      - name: Зібрати сторінку зі списком робіт
+        run: node .github/build-index.mjs
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
