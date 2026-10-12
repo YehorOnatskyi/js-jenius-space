@@ -18,23 +18,29 @@
 
 .input {
   width: 100%;
+  min-height: 44px;
   padding: 10px 12px;
   border: 1px solid #d4d4d8;
   border-radius: 6px;
-  font-size: 15px;
+  /* Ровно 16px, не меньше: Safari на iPhone сам увеличивает масштаб страницы,
+     когда фокус попадает в поле с текстом мельче 16px, и обратно не возвращает. */
+  font-size: 16px;
 }
 
 .checkboxRow {
   display: flex;
   align-items: center;
   gap: 10px;
+  /* Вся строка — цель для пальца, а не только сам квадратик. */
+  min-height: 44px;
   margin: 0 0 16px;
   cursor: pointer;
 }
 
 .checkbox {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
   cursor: pointer;
 }
 

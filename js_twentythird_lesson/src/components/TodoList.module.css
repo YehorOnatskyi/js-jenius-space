@@ -68,3 +68,10 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+@media (max-width: 480px) {
+  .item {
+    gap: 8px;
+    padding: 12px 10px;
+  }
+}
